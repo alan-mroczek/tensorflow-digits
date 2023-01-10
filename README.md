@@ -23,3 +23,6 @@ To export use:
 
 ## Test tensorflow gpu
 `python3.9 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"`
+
+## Running tensorboard
+`tensorboard --logdir logs/fit`
