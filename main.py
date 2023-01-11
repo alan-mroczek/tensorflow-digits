@@ -13,8 +13,6 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Dense(10)
 ])
 
-predictions = model(x_train[:1]).numpy()
-
 loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 
 model.compile(optimizer='adam',
@@ -28,8 +26,6 @@ tensorboard_callback = tf.keras.callbacks.TensorBoard(
 model.fit(
     x_train,
     y_train,
-    batch_size=32,
-    verbose=1,
     validation_data=(x_test, y_test),
     epochs=5,
     callbacks=[tensorboard_callback]
