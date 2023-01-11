@@ -15,8 +15,6 @@ model = tf.keras.models.Sequential([
 
 predictions = model(x_train[:1]).numpy()
 
-tf.nn.softmax(predictions).numpy()
-
 loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 
 model.compile(optimizer='adam',
@@ -27,6 +25,12 @@ log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(
     log_dir=log_dir, histogram_freq=1)
 
-model.fit(x_train, y_train, epochs=15, callbacks=[tensorboard_callback])
-
-model.evaluate(x_test,  y_test, verbose=2)
+model.fit(
+    x_train,
+    y_train,
+    batch_size=32,
+    verbose=1,
+    validation_data=(x_test, y_test),
+    epochs=5,
+    callbacks=[tensorboard_callback]
+)
